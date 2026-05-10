@@ -623,9 +623,9 @@ export default function App() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 }}
               className="relative text-white text-6xl md:text-[140px] font-black mb-4 tracking-tighter font-display glitch-text glitch-active uppercase leading-[0.8] py-4"
-              data-text="RoboFusion 1.0"
+              data-text="RoboFusion"
             >
-              RoboFusion <span className="text-primary italic">1.0</span>
+              RoboFusion
             </motion.h1>
             
             <motion.div 
@@ -798,7 +798,7 @@ export default function App() {
              <h2 className="text-5xl font-black mb-16 tracking-tighter text-white font-display uppercase">Frequent <span className="text-primary italic">Syncs</span></h2>
              <div className="space-y-6">
                 {[
-                  { q: "Who can register for RoboFusion 1.0?", a: "This is an intra-university event open to all students of UFTB." },
+                  { q: "Who can register for RoboFusion?", a: "This is an intra-university event open to all students of UFTB." },
                   { q: "Can I participate in multiple events?", a: "Yes, you can register for multiple modules as long as the schedule allows." },
                   { q: "Is there a team size limit?", a: "Most events support teams up to 4 members. Check specific module details." },
                   { q: "What should I bring to the fest?", a: "Participants should bring their robots, project components, and university ID cards." }
@@ -1388,7 +1388,7 @@ export default function App() {
               <img src={logo} alt="RoboFusion Logo" className="h-16 w-auto object-contain" />
               <div className="text-left">
                 <div className="text-white font-black text-2xl tracking-tighter font-display uppercase leading-none">UFTB ROBOTICS CLUB</div>
-                <div className="text-primary font-black text-sm tracking-[0.4em] uppercase italic opacity-70">Robofusion 1.0</div>
+                <div className="text-primary font-black text-sm tracking-[0.4em] uppercase italic opacity-70">Robofusion</div>
               </div>
             </div>
             <div className="text-[10px] font-black text-slate-500 uppercase tracking-[1em] opacity-40">Innovate · Create · Automate</div>
@@ -1405,7 +1405,7 @@ export default function App() {
 
           <div className="pt-12 border-t border-slate-900/50 flex flex-col md:flex-row items-center justify-between gap-8">
             <p className="text-[9px] text-slate-600 font-bold uppercase tracking-[0.3em] font-mono">
-              © 2026 UFTB Robotics Club · Project Singularity
+              © 2026 UFTB Robotics Club · robofusion.com
             </p>
           </div>
         </div>
