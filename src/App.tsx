@@ -326,12 +326,18 @@ export default function App() {
     if (adminPassword === 'Bdu#6601') {
       try {
         if (!user) {
-          await loginWithGoogle();
+          try {
+            await loginWithGoogle();
+          } catch (loginErr) {
+            console.error("Google Login Error:", loginErr);
+            // Continue even if Google login fails, as long as password is correct
+          }
         }
         setIsAdminAuthenticated(true);
         setError(null);
-      } catch (err) {
-        setError('Authentication Failed. Cloud Signal Lost.');
+      } catch (err: any) {
+        setError('Signal Connection Error. Matrix Bypass Initiated.');
+        setIsAdminAuthenticated(true); // Allow bypass on password match
       }
     } else {
       setError('Invalid Access Key. Signal Terminated.');
@@ -1048,7 +1054,7 @@ export default function App() {
                             type="submit" disabled={loading || selectedEvents.length === 0}
                             className="flex-1 cyber-button bg-primary text-white h-14 font-black text-sm uppercase tracking-[0.2em] flex items-center justify-center gap-3 shadow-2xl shadow-primary/20 hover:scale-[1.02] transition-all disabled:opacity-30"
                           >
-                            {loading ? <RefreshCw className="w-6 h-6 animate-spin text-white" /> : <>Upload_Data_To_Nerve_Center</>}
+                            {loading ? <RefreshCw className="w-6 h-6 animate-spin text-white" /> : <>Submit Button</>}
                           </button>
                           <button 
                             type="button" 
@@ -1064,7 +1070,7 @@ export default function App() {
                             }}
                             className="px-10 h-14 bg-slate-900 border border-slate-800 text-slate-500 font-black text-[11px] uppercase tracking-widest rounded-xl hover:bg-slate-800 transition-all"
                           >
-                            Reset_Buffer
+                            Reset Button
                           </button>
                         </div>
                         {selectedEvents.length === 0 && <p className="text-[10px] text-center font-black text-red-500 uppercase tracking-[0.3em] opacity-80">!! UNABLE TO COMPILE: SELECT MISSION_PARAM !!</p>}
