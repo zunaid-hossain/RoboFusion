@@ -327,17 +327,33 @@ export default function App() {
       try {
         if (!user) {
           try {
-            await loginWithGoogle();
-          } catch (loginErr) {
+            const loginResult = await loginWithGoogle();
+            console.log("Admin Login Success", loginResult.user.email);
+          } catch (loginErr: any) {
             console.error("Google Login Error:", loginErr);
-            // Continue even if Google login fails, as long as password is correct
+            if (loginErr.code === 'auth/unauthorized-domain') {
+              setError(`AUTH_RESTRICTED: Domain "${window.location.hostname}" not authorized in Firebase Console > Authentication > Settings.`);
+              return;
+            }
+            if (loginErr.code === 'auth/popup-blocked') {
+              setError('AUTH_BLOCKED: Login popup blocked. Please allow popups for this site.');
+              return;
+            }
+            if (loginErr.code === 'auth/cancelled-popup-request' || loginErr.code === 'auth/popup-closed-by-user') {
+              setError('AUTH_CANCELLED: Login cancelled. Data access will be limited.');
+              setIsAdminAuthenticated(true);
+              return;
+            }
+            setError(`SIGNAL_LOST: ${loginErr.message}`);
+            setIsAdminAuthenticated(true);
+            return;
           }
         }
         setIsAdminAuthenticated(true);
         setError(null);
       } catch (err: any) {
-        setError('Signal Connection Error. Matrix Bypass Initiated.');
-        setIsAdminAuthenticated(true); // Allow bypass on password match
+        setError('CRITICAL: Matrix Signal Interrupted.');
+        setIsAdminAuthenticated(true);
       }
     } else {
       setError('Invalid Access Key. Signal Terminated.');
@@ -384,16 +400,24 @@ export default function App() {
   }, [isAdminMode, isAdmin, isAdminAuthenticated]);
 
   const fetchRegistrations = async () => {
-    if (!auth.currentUser || (!isAdmin && !isAdminAuthenticated)) return;
+    if (!auth.currentUser && !isAdminAuthenticated) return;
     
+    // Check if we have password access but no firebase auth
+    if (!auth.currentUser && isAdminAuthenticated) {
+      setError("ADMIN BYPASS ACTIVE: Database access restricted without Google Login.");
+    }
+
     setLoading(true);
     try {
       const q = query(collection(db, 'registrations'), orderBy('createdAt', 'desc'));
       const snapshot = await getDocs(q);
       const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Registration));
       setRegistrations(data);
-    } catch (err) {
-      handleFirestoreError(err, OperationType.LIST, 'registrations');
+      if (auth.currentUser) setError(null);
+    } catch (err: any) {
+      console.error("Fetch Error:", err);
+      setError("DATABASE ACCESS DENIED: Missing or insufficient permissions.");
+      // handleFirestoreError(err, OperationType.LIST, 'registrations');
     } finally {
       setLoading(false);
     }
