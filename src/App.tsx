@@ -1407,6 +1407,7 @@ export default function App() {
             <p className="text-[9px] text-slate-600 font-bold uppercase tracking-[0.3em] font-mono">
               © 2026 UFTB Robotics Club · RoboFusion
             </p>
+
           </div>
         </div>
       </footer>
