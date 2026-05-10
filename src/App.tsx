@@ -1405,7 +1405,7 @@ export default function App() {
 
           <div className="pt-12 border-t border-slate-900/50 flex flex-col md:flex-row items-center justify-between gap-8">
             <p className="text-[9px] text-slate-600 font-bold uppercase tracking-[0.3em] font-mono">
-              © 2026 UFTB Robotics Club · robofusion.com
+              © 2026 UFTB Robotics Club · RoboFusion
             </p>
           </div>
         </div>
