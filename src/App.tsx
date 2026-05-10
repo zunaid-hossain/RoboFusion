@@ -1175,7 +1175,7 @@ export default function App() {
         <div className="pt-24 px-6 max-w-7xl mx-auto pb-20">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
             <div>
-              <div className="font-mono text-primary text-[10px] tracking-[0.5em] mb-2 uppercase">COMMAND CENTER // ADMIN_V1.0</div>
+              <div className="font-mono text-primary text-[10px] tracking-[0.5em] mb-2 uppercase">COMMAND CENTER // ADMIN_TERMINAL</div>
               <h2 className="text-5xl font-black tracking-tighter text-white font-display uppercase">Data <span className="text-primary italic">Terminal</span></h2>
             </div>
             <div className="flex flex-wrap gap-4">
