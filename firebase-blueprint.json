@@ -1,0 +1,71 @@
+{
+  "entities": {
+    "Registration": {
+      "title": "Registration",
+      "description": "Participant registration for the RoboFusion event.",
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "studentId": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "department": { "type": "string" },
+        "semester": { "type": "string" },
+        "teamName": { "type": "string" },
+        "teamSize": { "type": "number" },
+        "teamMembers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "studentId": { "type": "string" },
+              "department": { "type": "string" },
+              "email": { "type": "string" }
+            }
+          }
+        },
+        "selectedEvents": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "isClubMember": { "type": "boolean" },
+        "paymentMethod": { "type": "string" },
+        "transactionId": { "type": "string" },
+        "totalAmount": { "type": "number" },
+        "projectTitle": { "type": "string" },
+        "message": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "confirmed", "rejected"]
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "studentId",
+        "email",
+        "phone",
+        "department",
+        "semester",
+        "selectedEvents",
+        "isClubMember",
+        "paymentMethod",
+        "transactionId",
+        "totalAmount",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/registrations/{registrationId}": {
+      "schema": "Registration",
+      "description": "Collection of all race registrations."
+    }
+  }
+}

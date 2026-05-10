@@ -1,0 +1,6 @@
+{
+  "name": "RoboFusion 1.0",
+  "description": "The official intra-university robotics fest platform for UFTB Robotics Club. Features registration, live schedule, and competition tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
